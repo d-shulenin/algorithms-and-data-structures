@@ -12,3 +12,4 @@ function quickSort(array) {
     return [...quickSort(less), pivot, ...quickSort(greater)]
 }
 
+//The time complexity of the quick sort is O(n*log(n))
