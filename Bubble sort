@@ -11,4 +11,4 @@ function bubbleSort(array) {
     return array
 }
 
-//The time complexity of the selection sort is O(n^2)
+//The time complexity of the bubble sort is O(n^2)
