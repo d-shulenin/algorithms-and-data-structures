@@ -1,0 +1,23 @@
+const recursive = tree => {
+    let sum = 0
+    tree.forEach(node => {
+        sum+=node.value
+        if (!node.children) return node.value
+        sum+=recursive(node.children)
+    })
+    return sum
+}
+
+const iteration = tree => {
+    if(!tree.length) return 0
+    let sum = 0
+    //Using stack
+    let stack = []
+    tree.forEach(node => stack.push(node))
+    while(stack.length) {
+        const node = stack.pop()
+        sum+=node.value
+        if (node.children) node.children.forEach(child => stack.push(child))
+    }
+    return sum
+}
