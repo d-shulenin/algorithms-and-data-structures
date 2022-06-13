@@ -1,0 +1,40 @@
+class Node {
+    constructor(value) {
+        this.value = value
+        this.left = null
+        this.right = null
+    }
+}
+
+class BinaryTree {
+    constructor() {
+        this.root = null
+    }
+    add(value) {
+        if(!this.root) this.root = new Node(value)
+        else {
+            let node = this.root
+            let newNode = new Node(value)
+            while(node) {
+                if (value<=node.value) {
+                    if(!node.left) break   
+                    node = node.left
+                }
+                else {
+                    if(!node.right) break
+                    node = node.right
+                }
+            }
+            if (value<=node.value) node.left = newNode
+            else node.right = newNode
+        }
+    }
+    print(root = this.root) {
+        if (!root) {
+            return true
+        }
+        console.log(root.value)
+        this.print(root.left)
+        this.print(root.right)
+    }
+}
