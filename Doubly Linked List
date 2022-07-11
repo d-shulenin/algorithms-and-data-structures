@@ -1,0 +1,109 @@
+class Node {
+    constructor(val) {
+        this.value = val
+        this.next = null
+        this.prev = null
+    }
+}
+
+class DoublyLinkedList {
+    constructor() {
+        this.head = null
+        this.tail = null
+        this.length = 0
+    }
+    push(val) {
+        const node = new Node(val)
+        if(!this.head) {
+            this.head = this.tail = node
+        }
+        else {
+            const temp = this.tail
+            this.tail = node
+            temp.next = node
+            node.prev = temp 
+        }
+        this.length ++ 
+        return this
+    }
+    pop() {
+        if(!this.head) return undefined
+        const temp = this.tail
+        if (this.length === 1) {
+            this.head = null
+            this.tail = null
+        }
+        else {
+            this.tail = temp.prev
+            this.tail.next = null
+            temp.prev = null
+        }
+        this.length--
+        return this
+    }
+    unshift(val) {
+        const node = new Node(val)
+        if(!this.head) {
+            this.head = this.tail = node
+        }
+        else {
+            const temp = this.head
+            temp.prev = node
+            node.next = temp
+            this.head = node
+        }
+        this.length++
+        return this
+    }
+    shift() {
+        if(!this.head) return undefined
+        const temp = this.head
+        if (this.length === 1) {
+            this.head = null
+            this.tail = null
+        }
+        else {
+            this.head = temp.next
+            this.head.prev = null
+            temp.next = null
+        }
+        this.length--
+        return this
+    }
+    insert(index, val) {
+        if(index<0 || index>this.length) return undefined
+        if(index===0) return this.unshift(val)
+        if(index===this.length) return this.push(val)
+        const node = new Node(val)
+        let current = this.head
+        let counter = 0
+        while(counter!==index) {
+            current = current.next
+            counter++
+        }
+        let prev = current.prev
+        prev.next = node
+        node.next = current
+        node.prev = prev
+        current.prev = node
+        this.length++
+        return this
+    }
+    remove(index) {
+        if(index<0 || index>this.length) return undefined
+        if(index===0) return this.shift()
+        if(index===this.length-1) return this.pop()
+        let current = this.head
+        let counter = 0
+        while(counter!==index) {
+            current = current.next
+            counter++
+        }
+        let prev = current.prev
+        let next = current.next
+        prev.next = next
+        next.prev = prev
+        this.length--
+        return this
+    }
+}
